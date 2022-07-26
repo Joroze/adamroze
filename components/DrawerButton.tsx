@@ -20,7 +20,6 @@ import { NAV_ROUTES } from '../lib/routes';
 
 const DrawerButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = useRef();
 
   return (
     <>
@@ -28,15 +27,9 @@ const DrawerButton = () => {
         variant="ghost"
         icon={<FiMenu fontSize="1.25rem" />}
         aria-label="Open Menu"
-        ref={btnRef}
         onClick={onOpen}
       />
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onClose}
-        finalFocusRef={btnRef}
-      >
+      <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
