@@ -23,7 +23,7 @@ export function Results({
         width="100%"
       >
         <Box padding="8" display="flex" width="100%" minHeight="inherit">
-          <Flex flexGrow={1} flexDir="column">
+          <Flex gap={3} flexGrow={1} flexDir="column">
             <Heading textTransform="capitalize">
               {getLastSegmentInPath(router.pathname)}
             </Heading>
