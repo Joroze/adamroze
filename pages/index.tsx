@@ -36,8 +36,8 @@ export function Index() {
             boxShadow="2xl"
           >
             <Image
-              width="300px"
-              height="300px"
+              width="400px"
+              height="400px"
               alt="action shot"
               src="/assets/images/actionshot.jpg"
             />
