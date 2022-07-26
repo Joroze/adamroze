@@ -13,7 +13,7 @@ export const NAV_ROUTES = (({ treatments, location, results }) => ({
   location,
 }))(ROUTES);
 
-export const getLastSegmentInPath = (thePath) =>
+export const getLastSegmentInPath = (thePath: string) =>
   thePath.substring(thePath.lastIndexOf('/') + 1);
 
 export default ROUTES;

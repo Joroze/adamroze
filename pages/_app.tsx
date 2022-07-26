@@ -20,7 +20,7 @@ const themeWithFont = extendTheme({
   styles: {
     global: () => ({
       body: {
-        bg: '#2a384e',
+        bg: '#344742',
       },
     }),
   },

@@ -10,7 +10,7 @@ import { FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { NAV_ROUTES } from '../lib/routes';
 import DrawerButton from './DrawerButton';
 
-const TopNavigator = (props) => {
+const TopNavigator = () => {
   // const isLarge = useBreakpointValue({ md: true });
 
   // const { colorMode, toggleColorMode } = useColorMode();
