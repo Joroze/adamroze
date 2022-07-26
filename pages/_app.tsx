@@ -19,8 +19,12 @@ const themeWithFont = extendTheme({
   },
   styles: {
     global: () => ({
+      html: {
+        height: '100%',
+      },
       body: {
-        bg: '#344742',
+        height: '100%',
+        bg: '#2a384e',
       },
     }),
   },

@@ -28,7 +28,6 @@ const TopNavigator = () => {
       boxShadow="xl"
       height="75px"
       width="100%"
-      bgGradient="linear(to-r, #20293e, #4a637feb, #20293e)"
       color="white"
       alignItems="center"
     >
