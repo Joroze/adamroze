@@ -132,7 +132,7 @@ function TestimonialCard(props: TestimonialCardProps) {
   );
 }
 
-export default function GridBlurredBackdrop() {
+export default function Testimonials() {
   return (
     <Flex
       textAlign={'center'}

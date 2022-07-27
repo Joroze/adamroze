@@ -5,6 +5,7 @@ import {
   Divider,
   Flex,
   Heading,
+  Highlight,
   SimpleGrid,
   Text,
   VStack,
@@ -12,7 +13,9 @@ import {
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import { getPlaiceholder } from 'plaiceholder';
-import GridBlurredBackdrop from '../components/Reviews';
+import ContactFormButton from '../components/ContactFormButton';
+import Features from '../components/Features';
+import Testimonials from '../components/Testimonials';
 
 export function Index({
   actionShotBlur,
@@ -20,18 +23,18 @@ export function Index({
   return (
     <Box color="white" as="section">
       <Flex gap={12} flexDir="column">
-        <Box marginBottom={[0, 0, '75px']} />
+        <Box marginBottom={{ base: undefined, md: '75px' }} />
         <Box>
           <SimpleGrid
             spacing={10}
-            gridTemplateRows={['55%', '55%', '100%', '100%']}
-            columns={[1, 1, 2]}
+            gridTemplateRows={{ base: '55%', md: '100%' }}
+            columns={{ base: 1, md: 2 }}
             height="550px"
           >
             <Box alignItems="center" display="flex">
               <VStack
                 padding={[4, 4, null, null]}
-                paddingLeft={[null, null, 16, 16]}
+                paddingLeft={{ base: undefined, md: 16 }}
                 gap={4}
               >
                 <Heading
@@ -41,7 +44,9 @@ export function Index({
                     'table-caption',
                     'table-caption',
                   ]}
-                  sx={{ wordSpacing: [null, '9999rem', '9999rem', '9999rem'] }}
+                  sx={{
+                    wordSpacing: [null, '9999rem', '9999rem', '9999rem'],
+                  }}
                   color="#d5b488"
                   as="h1"
                   size={['2xl', '3xl', '2xl', '3xl']}
@@ -54,24 +59,24 @@ export function Index({
                   maintenance and a lot of self love.
                 </Text>
                 <Box width="100%">
-                  <Button
+                  <ContactFormButton
                     backgroundColor="#96978a2e"
                     colorScheme="gray"
                     variant="outline"
                   >
                     Book an appointment
-                  </Button>
+                  </ContactFormButton>
                 </Box>
               </VStack>
             </Box>
             <Box
+              width="100%"
               height="100%"
               position="relative"
               isolation="isolate"
               display="flex"
               overflow="hidden"
-              borderLeftRadius={[null, null, '3px', '3px']}
-              boxShadow={[null, null, '2xl', '2xl']}
+              borderLeftRadius={{ base: undefined, md: '3px' }}
             >
               <Image
                 placeholder="blur"
@@ -86,10 +91,10 @@ export function Index({
           <Flex
             justifyContent="center"
             alignItems="center"
-            height={['300px', '350px', '400px']}
+            height={{ base: '300xp', sm: '350px', md: '400px' }}
             bgColor="white"
           >
-            <Box maxWidth={['250px', '400px', '500px', '500px']}>
+            <Box maxWidth={{ base: '250px', sm: '400px', md: '500px' }}>
               <Text
                 fontFamily="Raleway"
                 fontWeight="extrabold"
@@ -119,11 +124,14 @@ export function Index({
             chronic migraines, jaw pain and excessive sweating.
           </Text>
         </Flex>
+        <Divider />
         <Box px={8}>
-          <Divider />
+          <Features />
         </Box>
+        <Divider />
+
         <Box pb={8} px={8}>
-          <GridBlurredBackdrop />
+          <Testimonials />
         </Box>
       </Flex>
     </Box>
