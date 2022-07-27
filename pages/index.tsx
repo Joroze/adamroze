@@ -1,23 +1,110 @@
-import { Box, Flex, Heading, SimpleGrid, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  Flex,
+  Heading,
+  SimpleGrid,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import { getPlaiceholder } from 'plaiceholder';
 import GridBlurredBackdrop from '../components/Reviews';
-import { getLastSegmentInPath } from '../lib/routes';
 
 export function Index({
   actionShotBlur,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const router = useRouter();
-
   return (
     <Box color="white" as="section">
-      <Flex gap={6} padding="8" flexDir="column">
-        <Flex gap={2} flexDir="column">
-          <Heading textTransform="capitalize">
-            {getLastSegmentInPath(router.pathname)}
-          </Heading>
+      <Flex gap={12} flexDir="column">
+        <Box marginBottom={[0, 0, '75px']} />
+        <Box>
+          <SimpleGrid
+            spacing={10}
+            gridTemplateRows={['55%', '55%', '100%', '100%']}
+            columns={[1, 1, 2]}
+            height="550px"
+          >
+            <Box alignItems="center" display="flex">
+              <VStack
+                padding={[4, 4, null, null]}
+                paddingLeft={[null, null, 16, 16]}
+                gap={4}
+              >
+                <Heading
+                  display={[
+                    null,
+                    'table-caption',
+                    'table-caption',
+                    'table-caption',
+                  ]}
+                  sx={{ wordSpacing: [null, '9999rem', '9999rem', '9999rem'] }}
+                  color="#d5b488"
+                  as="h1"
+                  size={['2xl', '3xl', '2xl', '3xl']}
+                >
+                  MEDICAL AESTHETICS MADE MODERN.
+                </Heading>
+                <Text>
+                  Specializing in medical-grade treatments for people who want
+                  to look their best, and who prioritize prevention, proper
+                  maintenance and a lot of self love.
+                </Text>
+                <Box width="100%">
+                  <Button
+                    backgroundColor="#96978a2e"
+                    colorScheme="gray"
+                    variant="outline"
+                  >
+                    Book an appointment
+                  </Button>
+                </Box>
+              </VStack>
+            </Box>
+            <Box
+              height="100%"
+              position="relative"
+              isolation="isolate"
+              display="flex"
+              overflow="hidden"
+              borderLeftRadius={[null, null, '3px', '3px']}
+              boxShadow={[null, null, '2xl', '2xl']}
+            >
+              <Image
+                placeholder="blur"
+                blurDataURL={actionShotBlur}
+                objectFit="cover"
+                layout="fill"
+                alt="action shot"
+                src="/assets/images/actionshot.jpg"
+              />
+            </Box>
+          </SimpleGrid>
+          <Flex
+            justifyContent="center"
+            alignItems="center"
+            height={['300px', '350px', '400px']}
+            bgColor="white"
+          >
+            <Box maxWidth={['250px', '400px', '500px', '500px']}>
+              <Text
+                fontFamily="Raleway"
+                fontWeight="extrabold"
+                textAlign="center"
+                fontSize={['3xl', '5xl', '6xl', '6xl', '6xl']}
+                color="blue.800"
+                bgGradient="linear(to-l, blue.900, #6a583e)"
+                bgClip="text"
+              >
+                Changing The Face Of Medical Aesthetics
+              </Text>
+            </Box>
+          </Flex>
+        </Box>
+        <Flex px={8} gap={2} flexDir="column">
           <Text>
             Adam Rosenberg is a Board Certified Physician Assistant based in
             NYC.
@@ -32,36 +119,12 @@ export function Index({
             chronic migraines, jaw pain and excessive sweating.
           </Text>
         </Flex>
-        <SimpleGrid
-          spacing={2}
-          gridTemplateRows={['45%', '30%', '100%']}
-          columns={[1, 1, 2]}
-          height="550px"
-        >
-          <Box>
-            <Heading color="#d5b488" as="h1" size="3xl">
-              MEDICAL AESTHETICS MADE MODERN.
-            </Heading>
-          </Box>
-          <Box
-            position="relative"
-            isolation="isolate"
-            display="flex"
-            overflow="hidden"
-            borderRadius="4px"
-            boxShadow="2xl"
-          >
-            <Image
-              placeholder="blur"
-              blurDataURL={actionShotBlur}
-              objectFit="cover"
-              layout="fill"
-              alt="action shot"
-              src="/assets/images/actionshot.jpg"
-            />
-          </Box>
-        </SimpleGrid>
-        <GridBlurredBackdrop />
+        <Box px={8}>
+          <Divider />
+        </Box>
+        <Box pb={8} px={8}>
+          <GridBlurredBackdrop />
+        </Box>
       </Flex>
     </Box>
   );
