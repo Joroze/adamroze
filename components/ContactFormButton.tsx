@@ -29,6 +29,7 @@ import { useForm } from 'react-hook-form';
 
 export type ContactFormValues = {
   name: string;
+  phone: string;
   email: string;
   message: string;
 };
@@ -136,6 +137,29 @@ export default function ContactFormButton(props: ButtonProps) {
                   </InputGroup>
                   <FormErrorMessage>
                     {errors.name && errors.name.message}
+                  </FormErrorMessage>
+                </FormControl>
+
+                <FormControl isRequired isInvalid={!!errors.phone}>
+                  <FormLabel htmlFor="name">Phone Number</FormLabel>
+
+                  <InputGroup>
+                    <InputLeftElement>
+                      <BsPerson />
+                    </InputLeftElement>
+                    <Input
+                      readOnly={
+                        isSubmitting || isSubmitSuccessfulWithoutApiError
+                      }
+                      type="number"
+                      placeholder="Your Phone Number"
+                      {...register('phone', {
+                        required: 'Phone number is required',
+                      })}
+                    />
+                  </InputGroup>
+                  <FormErrorMessage>
+                    {errors.phone && errors.phone.message}
                   </FormErrorMessage>
                 </FormControl>
 

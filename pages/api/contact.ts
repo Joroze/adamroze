@@ -18,6 +18,7 @@ export default async function brandHandler(
       try {
         const payload: ContactFormValues = {
           name: body.name,
+          phone: body.phone,
           email: body.email,
           message: body.message,
         };
@@ -192,6 +193,8 @@ table, td { color: #000000; } </style>
   <p style="font-size: 14px; line-height: 140%;">Hi Adam! <span style="text-decoration: underline; font-size: 14px; line-height: 19.6px;">Here's the information as follows</span>:</p>
 <p style="font-size: 14px; line-height: 140%;"> </p>
 <p style="font-size: 14px; line-height: 140%;">Name: ${formValues.name}</p>
+<p style="font-size: 14px; line-height: 140%;"> </p>
+<p style="font-size: 14px; line-height: 140%;">Phone: ${formValues.phone}</p>
 <p style="font-size: 14px; line-height: 140%;"> </p>
 <p style="font-size: 14px; line-height: 140%;">Email: ${formValues.email}</p>
 <p style="font-size: 14px; line-height: 140%;"> </p>
