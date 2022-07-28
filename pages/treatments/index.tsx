@@ -36,20 +36,6 @@ export const Treatments = () => {
   );
 };
 
-// Cosmetic:
-// Botox:  $10/unit
-//     •    Patients will often require ~50 units total for treating the forehead, “11 lines”, “crows feet” and “bunny lines”.
-
-// Medical:
-// Botox: Hyperhydrosis (excess sweating) - Covered by Health insurance
-//     ⁃    Botox can be used to block the nerve signals responsible for sweating, stopping the sweat glands from producing too much sweat. Commonly injected in scalp, axilla, hands/feet.
-
-// Botox: Jaw pain - TMJ/orofacial dystonia - Covered by Health insurance
-//     ⁃    Botox can be used to relax overactive jaw muscles that cause pain/clenching.
-
-// Botox: Chronic Migraines - Covered by Health Insurance
-//     ⁃    Botox can be used to significantly reduce migraine intensity/duration. You may qualify for this treatment if you have frequent migraines lasting 4+ hours/day and have failed previous treatments.
-
 type Treatment = {
   id?: string;
   title: string;
