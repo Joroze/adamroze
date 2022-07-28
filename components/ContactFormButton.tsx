@@ -100,6 +100,7 @@ export default function ContactFormButton(props: ButtonProps) {
         value: 4,
         message: 'Minimum length should be 4',
       },
+      maxLength: 50,
     }),
   };
 
@@ -155,6 +156,7 @@ export default function ContactFormButton(props: ButtonProps) {
                       placeholder="Your Phone Number"
                       {...register('phone', {
                         required: 'Phone number is required',
+                        maxLength: 50,
                       })}
                     />
                   </InputGroup>
@@ -182,6 +184,7 @@ export default function ContactFormButton(props: ButtonProps) {
                           value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                           message: 'Invalid email address',
                         },
+                        maxLength: 50,
                       })}
                     />
                   </InputGroup>
@@ -203,6 +206,7 @@ export default function ContactFormButton(props: ButtonProps) {
                         value: 4,
                         message: 'Minimum length should be 4',
                       },
+                      maxLength: 500,
                     })}
                   />
                   <FormErrorMessage>
