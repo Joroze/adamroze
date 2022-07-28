@@ -1,11 +1,8 @@
 import {
   Box,
-  Button,
-  Container,
   Divider,
   Flex,
   Heading,
-  Highlight,
   SimpleGrid,
   Text,
   VStack,
@@ -15,7 +12,6 @@ import Image from 'next/image';
 import { getPlaiceholder } from 'plaiceholder';
 import ContactFormButton from '../components/ContactFormButton';
 import Features from '../components/Features';
-import Testimonials from '../components/Testimonials';
 
 export function Index({
   actionShotBlur,
@@ -91,10 +87,11 @@ export function Index({
           <Flex
             justifyContent="center"
             alignItems="center"
-            height={{ base: '300xp', sm: '350px', md: '400px' }}
+            p={{ base: 4, sm: undefined }}
+            minHeight={{ base: undefined, sm: '300px', md: '400px' }}
             bgColor="white"
           >
-            <Box maxWidth={{ base: '250px', sm: '400px', md: '500px' }}>
+            <Box maxWidth={{ base: '265px', sm: '400px', md: '500px' }}>
               <Text
                 fontFamily="Raleway"
                 fontWeight="extrabold"
@@ -125,14 +122,19 @@ export function Index({
           </Text>
         </Flex>
         <Divider />
-        <Box px={8}>
+        <VStack spacing={10} px={8}>
           <Features />
-        </Box>
-        <Divider />
-
-        <Box pb={8} px={8}>
-          <Testimonials />
-        </Box>
+          <Box>
+            <ContactFormButton
+              backgroundColor="#96978a2e"
+              colorScheme="gray"
+              variant="outline"
+            >
+              Book an appointment
+            </ContactFormButton>
+          </Box>
+        </VStack>
+        <div />
       </Flex>
     </Box>
   );
