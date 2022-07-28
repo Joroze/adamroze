@@ -53,7 +53,7 @@ export default async function brandHandler(
 }
 
 async function sendNotification(formValues: ContactFormValues) {
-  return await Promise.all([sendSMS(formValues), sendEmail(formValues)]);
+  return await Promise.all([sendEmail(formValues), sendSMS(formValues)]);
 }
 
 async function sendSMS(formValues: ContactFormValues) {
