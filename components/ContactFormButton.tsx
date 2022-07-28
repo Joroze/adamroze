@@ -112,7 +112,7 @@ export default function ContactFormButton(props: ButtonProps) {
           bg="blackAlpha.200"
           backdropFilter="blur(2px) hue-rotate(-10deg)"
         />
-        <ModalContent alignSelf="center">
+        <ModalContent>
           <ModalHeader>Book your appointment</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
