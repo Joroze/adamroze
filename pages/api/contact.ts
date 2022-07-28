@@ -4,8 +4,15 @@
 import sgMail from '@sendgrid/mail';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ContactFormValues } from '../../components/ContactFormButton';
+import twilio from 'twilio';
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
+const twilioAccountSid = process.env.TWILIO_SID as string;
+const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN as string;
+const sendGridAPIKey = process.env.SENDGRID_API_KEY as string;
+
+const twilioClient = twilio(twilioAccountSid, twilioAuthToken);
+
+sgMail.setApiKey(sendGridAPIKey);
 
 export default async function brandHandler(
   req: NextApiRequest,
@@ -23,7 +30,7 @@ export default async function brandHandler(
           message: body.message,
         };
 
-        await sendEmail(payload);
+        await sendNotification(payload);
 
         return res.end();
       } catch (error) {
@@ -40,6 +47,27 @@ export default async function brandHandler(
       res.setHeader('Allow', ['POST']);
       res.status(405).end(`Method ${method} Not Allowed`);
   }
+}
+
+async function sendNotification(formValues: ContactFormValues) {
+  return await Promise.all([sendEmail(formValues), sendSMS(formValues)]);
+}
+
+async function sendSMS(formValues: ContactFormValues) {
+  if (!twilioAccountSid || !twilioAuthToken) {
+    console.log(
+      'Not sending SMS notification because one or more twilio tokens are missing'
+    );
+    return;
+  }
+
+  const message = await twilioClient.messages.create({
+    body: `Hi Adam, ${formValues} submitted an inquiry for your practice. Please check your email for further info.`,
+    to: '+15165782009',
+    from: '+19705980222',
+  });
+
+  return message;
 }
 
 async function sendEmail(formValues: ContactFormValues) {
