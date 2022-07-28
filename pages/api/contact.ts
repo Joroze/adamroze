@@ -8,7 +8,10 @@ import twilio from 'twilio';
 
 const twilioAccountSid = process.env.TWILIO_SID as string;
 const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN as string;
+const twilioSmsTo = process.env.TWILIO_SMS_TO as string;
+
 const sendGridAPIKey = process.env.SENDGRID_API_KEY as string;
+const sendGridEmailTo = process.env.SENDGRID_EMAIL_TO as string;
 
 const twilioClient = twilio(twilioAccountSid, twilioAuthToken);
 
@@ -24,10 +27,10 @@ export default async function brandHandler(
     case 'POST':
       try {
         const payload: ContactFormValues = {
-          name: body.name,
-          phone: body.phone,
-          email: body.email,
-          message: body.message,
+          name: body.name.substring(0, 50),
+          phone: body.phone.substring(0, 50),
+          email: body.email.substring(0, 50),
+          message: body.message.substring(0, 500),
         };
 
         await sendNotification(payload);
@@ -50,7 +53,7 @@ export default async function brandHandler(
 }
 
 async function sendNotification(formValues: ContactFormValues) {
-  return await Promise.all([sendEmail(formValues), sendSMS(formValues)]);
+  return await Promise.all([sendSMS(formValues), sendEmail(formValues)]);
 }
 
 async function sendSMS(formValues: ContactFormValues) {
@@ -62,8 +65,8 @@ async function sendSMS(formValues: ContactFormValues) {
   }
 
   const message = await twilioClient.messages.create({
-    body: `Hi Adam, ${formValues} submitted an inquiry for your practice. Please check your email for further info.`,
-    to: '+15165782009',
+    body: `Hi Adam, '${formValues.name}' submitted an inquiry for your practice. Please check your email for further info.`,
+    to: twilioSmsTo,
     from: '+19705980222',
   });
 
@@ -72,7 +75,7 @@ async function sendSMS(formValues: ContactFormValues) {
 
 async function sendEmail(formValues: ContactFormValues) {
   const msg = {
-    to: process.env.SENDGRID_EMAIL_TO as string,
+    to: sendGridEmailTo,
     from: 'tell.jordanr@gmail.com',
     subject: 'New form submission for your practice!',
     html: generateHtmlTemplate(formValues),
