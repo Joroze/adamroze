@@ -87,10 +87,11 @@ export function Index({
           <Flex
             justifyContent="center"
             alignItems="center"
-            minHeight={{ base: '165px', sm: '300px', md: '400px' }}
+            p={{ base: 4, sm: undefined }}
+            minHeight={{ base: undefined, sm: '300px', md: '400px' }}
             bgColor="white"
           >
-            <Box maxWidth={{ base: '250px', sm: '400px', md: '500px' }}>
+            <Box maxWidth={{ base: '265px', sm: '400px', md: '500px' }}>
               <Text
                 fontFamily="Raleway"
                 fontWeight="extrabold"
