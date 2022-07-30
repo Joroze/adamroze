@@ -30,7 +30,7 @@ import React, { useEffect, useState } from 'react';
 import { BsPerson } from 'react-icons/bs';
 import { MdOutlineEmail } from 'react-icons/md';
 import { Controller, useForm } from 'react-hook-form';
-import Dropzone from './DropZone';
+import Dropzone from './Dropzone';
 import { FaTelegramPlane } from 'react-icons/fa';
 
 export type ContactFormValues = {
