@@ -2,9 +2,18 @@
 // https://github.com/sendgrid/sendgrid-nodejs
 
 import sgMail from '@sendgrid/mail';
+import { AttachmentData } from '@sendgrid/helpers/classes/attachment';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ContactFormValues } from '../../components/ContactFormButton';
 import twilio from 'twilio';
+import formidable from 'formidable';
+import { readFile } from 'fs/promises';
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
 const twilioAccountSid = process.env.TWILIO_SID as string;
 const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN as string;
@@ -21,19 +30,35 @@ export default async function brandHandler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { method, body } = req;
+  const { method } = req;
 
   switch (method) {
     case 'POST':
       try {
-        const payload: ContactFormValues = {
-          name: body.name.substring(0, 50),
-          phone: body.phone.substring(0, 50),
-          email: body.email.substring(0, 50),
-          message: body.message.substring(0, 500),
-        };
+        const form = new formidable.IncomingForm({
+          keepExtensions: true,
+          multiples: false,
+          maxFiles: 1,
+        });
 
-        await sendNotification(payload);
+        const { fields, files } = await new Promise<{
+          fields: formidable.Fields;
+          files: formidable.Files;
+        }>((resolve, reject) => {
+          form.parse(req, (err, fields, files) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+
+            resolve({ fields, files });
+          });
+        });
+
+        await sendNotification({
+          ...fields,
+          insuranceFile: files.insuranceFile,
+        } as unknown as ContactFormValues);
 
         return res.end();
       } catch (error) {
@@ -56,6 +81,33 @@ async function sendNotification(formValues: ContactFormValues) {
   return await Promise.all([sendEmail(formValues), sendSMS(formValues)]);
 }
 
+async function sendEmail(formValues: ContactFormValues) {
+  const insuranceFormidableFile =
+    formValues.insuranceFile as unknown as formidable.File;
+  const fileData = await readFile(insuranceFormidableFile.filepath);
+
+  const attachment: AttachmentData = {
+    // Encode the buffer as a base64 encoded string
+    content: fileData.toString('base64'),
+    filename:
+      insuranceFormidableFile.originalFilename ||
+      insuranceFormidableFile.newFilename,
+    type: insuranceFormidableFile.mimetype ?? undefined,
+    disposition: 'attachment',
+    contentId: insuranceFormidableFile.hash ?? undefined,
+  };
+
+  const msg: sgMail.MailDataRequired = {
+    to: sendGridEmailTo,
+    from: 'tell.jordanr@gmail.com',
+    subject: 'New form submission for your practice!',
+    html: generateHtmlTemplate(formValues),
+    attachments: [attachment],
+  };
+
+  return await sgMail.send(msg);
+}
+
 async function sendSMS(formValues: ContactFormValues) {
   if (!twilioAccountSid || !twilioAuthToken) {
     console.log(
@@ -71,17 +123,6 @@ async function sendSMS(formValues: ContactFormValues) {
   });
 
   return message;
-}
-
-async function sendEmail(formValues: ContactFormValues) {
-  const msg = {
-    to: sendGridEmailTo,
-    from: 'tell.jordanr@gmail.com',
-    subject: 'New form submission for your practice!',
-    html: generateHtmlTemplate(formValues),
-  };
-
-  return await sgMail.send(msg);
 }
 
 function generateHtmlTemplate(formValues: ContactFormValues) {

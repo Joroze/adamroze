@@ -2,6 +2,8 @@ import {
   Box,
   Button,
   ButtonProps,
+  CloseButton,
+  Flex,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -17,24 +19,29 @@ import {
   ModalOverlay,
   Text,
   Textarea,
+  Tooltip,
   useDisclosure,
   useMergeRefs,
   VStack,
 } from '@chakra-ui/react';
+import { FcApproval } from 'react-icons/fc';
 import { useReward } from 'react-rewards';
 import React, { useEffect, useState } from 'react';
 import { BsPerson } from 'react-icons/bs';
 import { MdOutlineEmail } from 'react-icons/md';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
+import Dropzone from './DropZone';
+import { FaTelegramPlane } from 'react-icons/fa';
 
 export type ContactFormValues = {
   name: string;
   phone: string;
   email: string;
   message: string;
+  insuranceFile: File;
 };
 
-function manageErrors(response: any) {
+export function manageErrors(response: any) {
   if (!response.ok) {
     const responseError = {
       statusText: response.statusText,
@@ -44,16 +51,6 @@ function manageErrors(response: any) {
   }
 
   return response;
-}
-
-export async function postData(url: string, data: Record<string, any>) {
-  await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  }).then(manageErrors);
 }
 
 export default function ContactFormButton(props: ButtonProps) {
@@ -84,7 +81,17 @@ export default function ContactFormButton(props: ButtonProps) {
     try {
       setApiError(false);
 
-      await postData('/api/contact', values);
+      const formData = new FormData();
+      formData.append('name', values.name);
+      formData.append('email', values.email);
+      formData.append('phone', values.phone);
+      formData.append('message', values.message);
+      formData.append('insuranceFile', values.insuranceFile);
+
+      await fetch('/api/contact', {
+        method: 'POST',
+        body: formData,
+      }).then(manageErrors);
 
       reward();
     } catch (error) {
@@ -214,6 +221,58 @@ export default function ContactFormButton(props: ButtonProps) {
                   </FormErrorMessage>
                 </FormControl>
 
+                <FormControl isRequired isInvalid={!!errors.insuranceFile}>
+                  <FormLabel htmlFor="insuranceFile">Insurance Card</FormLabel>
+                  <Controller
+                    name="insuranceFile"
+                    control={form.control}
+                    rules={{ required: 'Your insurance card is required' }}
+                    render={({ field }) =>
+                      field.value ? (
+                        <Flex
+                          alignItems="center"
+                          justifyContent="space-between"
+                        >
+                          <Flex alignItems="center">
+                            <FcApproval />
+                            <Text ml={2} fontWeight="semibold" fontSize="sm">
+                              {field.value.name}
+                            </Text>
+                          </Flex>
+                          {!isSubmitting && !isSubmitSuccessfulWithoutApiError && (
+                            <Tooltip placement="top" label="Remove">
+                              <CloseButton
+                                onClick={() => {
+                                  field.onChange(null);
+                                }}
+                              />
+                            </Tooltip>
+                          )}
+                        </Flex>
+                      ) : (
+                        <VStack>
+                          <Dropzone
+                            multiple={false}
+                            maxFiles={1}
+                            onDrop={(acceptedFiles: File[]) => {
+                              field.onChange(acceptedFiles[0]);
+                            }}
+                            accept={{ 'image/*': [], 'application/pdf': [] }}
+                          />
+                          <Box width="100%">
+                            <Text fontStyle="italic" fontSize="xs">
+                              * File type must be image or PDF
+                            </Text>
+                          </Box>
+                        </VStack>
+                      )
+                    }
+                  />
+                  <FormErrorMessage>
+                    {errors.insuranceFile && errors.insuranceFile.message}
+                  </FormErrorMessage>
+                </FormControl>
+
                 {isSubmitSuccessfulWithoutApiError && !isSubmitting && (
                   <Text fontWeight="bold" color="green.500">
                     Done! You&apos;ll hear from us shortly.
@@ -232,6 +291,7 @@ export default function ContactFormButton(props: ButtonProps) {
           <ModalFooter>
             <span id="rewardId" />
             <Button
+              rightIcon={<FaTelegramPlane />}
               disabled={
                 isAnimating || isSubmitting || isSubmitSuccessfulWithoutApiError
               }
@@ -239,7 +299,7 @@ export default function ContactFormButton(props: ButtonProps) {
               loadingText="Submitting"
               type="submit"
               onClick={handleSubmit(onSubmit)}
-              colorScheme="blue"
+              colorScheme="green"
               mr={3}
             >
               {isSubmitSuccessfulWithoutApiError ? 'Submitted!' : 'Submit'}
