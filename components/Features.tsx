@@ -59,7 +59,7 @@ export default function Features() {
       <Feature
         icon={<Icon as={FcApprove} w={10} h={10} />}
         title={'See Instant Results'}
-        text="You'll see amazing results, fast!"
+        text="You'll see amazing results, fast."
       />
     </SimpleGrid>
   );
