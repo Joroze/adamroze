@@ -107,7 +107,7 @@ export function Index({
             minHeight={{ base: undefined, sm: '300px', md: '400px' }}
             bgColor="white"
           >
-            <Box maxWidth={{ base: '265px', sm: '400px', md: '500px' }}>
+            <Box maxWidth={{ base: '295px', sm: '400px', md: '500px' }}>
               <Text
                 fontFamily="Raleway"
                 fontWeight="extrabold"
