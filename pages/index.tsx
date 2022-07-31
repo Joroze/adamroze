@@ -43,7 +43,11 @@ export function Index({
                   alignItems="center"
                   display="flex"
                 >
-                  <VStack paddingLeft={{ base: undefined, xl: 16 }} gap={4}>
+                  <VStack
+                    zIndex="1"
+                    paddingLeft={{ base: undefined, xl: 16 }}
+                    gap={4}
+                  >
                     <Heading
                       display={[
                         null,
