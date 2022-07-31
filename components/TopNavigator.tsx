@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   ButtonGroup,
   Flex,
@@ -10,6 +11,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { NAV_ROUTES } from '../lib/routes';
+import ContactFormButton from './ContactFormButton';
 import DrawerButton from './DrawerButton';
 
 const TopNavigator = () => {
@@ -18,6 +20,7 @@ const TopNavigator = () => {
   const buttonColor = isHomePageRoute ? 'black' : 'orange.100';
 
   const isDesktop = useBreakpointValue({ base: false, lg: true });
+  const isXS = useBreakpointValue({ base: false, sm: true });
 
   return (
     <Flex
@@ -39,40 +42,56 @@ const TopNavigator = () => {
           </Text>
         </a>
       </Link>
-      {isDesktop ? (
-        <HStack height="100%" spacing={6}>
-          <ButtonGroup variant="link" size="lg" colorScheme="black" spacing="8">
-            {Object.entries(NAV_ROUTES).map(([label, url]) => (
-              <Link key={label} href={url}>
-                <Button textTransform="capitalize">{label}</Button>
-              </Link>
-            ))}
-          </ButtonGroup>
 
-          <Flex
-            as="a"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.linkedin.com/in/adamrosepa/"
+      <HStack spacing={6}>
+        {isXS && (
+          <ContactFormButton
+            colorScheme="orange"
+            size={{ base: 'xs', sm: 'xs', md: 'sm' }}
           >
-            <Button variant="link" color={buttonColor} aria-label="linked-in">
-              <FaLinkedin />
-            </Button>
-          </Flex>
-          <Flex
-            as="a"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.instagram.com/sculptedbyadam/"
-          >
-            <Button variant="link" color={buttonColor} aria-label="instagram">
-              <FaInstagram />
-            </Button>
-          </Flex>
-        </HStack>
-      ) : (
-        <DrawerButton />
-      )}
+            Book an appointment
+          </ContactFormButton>
+        )}
+        {isDesktop ? (
+          <HStack height="100%" spacing={6}>
+            <ButtonGroup
+              variant="link"
+              size="lg"
+              colorScheme="black"
+              spacing="8"
+            >
+              {Object.entries(NAV_ROUTES).map(([label, url]) => (
+                <Link key={label} href={url}>
+                  <Button textTransform="capitalize">{label}</Button>
+                </Link>
+              ))}
+            </ButtonGroup>
+
+            <Flex
+              as="a"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.linkedin.com/in/adamrosepa/"
+            >
+              <Button variant="link" color={buttonColor} aria-label="linked-in">
+                <FaLinkedin />
+              </Button>
+            </Flex>
+            <Flex
+              as="a"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.instagram.com/sculptedbyadam/"
+            >
+              <Button variant="link" color={buttonColor} aria-label="instagram">
+                <FaInstagram />
+              </Button>
+            </Flex>
+          </HStack>
+        ) : (
+          <DrawerButton />
+        )}
+      </HStack>
     </Flex>
   );
 };
