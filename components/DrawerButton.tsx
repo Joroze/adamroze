@@ -17,6 +17,7 @@ import Link from 'next/link';
 import { FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { FiMenu } from 'react-icons/fi';
 import { NAV_ROUTES } from '../lib/routes';
+import ContactFormButton from './ContactFormButton';
 
 const DrawerButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -37,6 +38,13 @@ const DrawerButton = () => {
 
           <DrawerBody>
             <VStack spacing={4} alignItems="flex-start">
+              <ContactFormButton
+                colorScheme="orange"
+                variant="outline"
+                size={{ base: 'xs', sm: 'xs', md: 'sm' }}
+              >
+                Book an appointment
+              </ContactFormButton>
               {Object.entries(NAV_ROUTES).map(([label, url]) => (
                 <Link key={label} href={url}>
                   <Button
