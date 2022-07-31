@@ -2,6 +2,7 @@ import {
   Button,
   ButtonGroup,
   Flex,
+  HStack,
   Text,
   useBreakpointValue,
 } from '@chakra-ui/react';
@@ -15,12 +16,6 @@ const TopNavigator = () => {
   const router = useRouter();
   const isHomePageRoute = router.pathname === '/';
   const buttonColor = isHomePageRoute ? 'black' : 'orange.100';
-
-  // const isLarge = useBreakpointValue({ md: true });
-
-  // const { colorMode, toggleColorMode } = useColorMode();
-  // const logoutColor = useColorModeValue('teal', 'tomato');
-  // const svgFilter = useColorModeValue(null, 'saturate(100)');
 
   const isDesktop = useBreakpointValue({ base: false, lg: true });
 
@@ -45,7 +40,15 @@ const TopNavigator = () => {
         </a>
       </Link>
       {isDesktop ? (
-        <ButtonGroup variant="link" size="lg" colorScheme="black" spacing="8">
+        <HStack height="100%" spacing={6}>
+          <ButtonGroup variant="link" size="lg" colorScheme="black" spacing="8">
+            {Object.entries(NAV_ROUTES).map(([label, url]) => (
+              <Link key={label} href={url}>
+                <Button textTransform="capitalize">{label}</Button>
+              </Link>
+            ))}
+          </ButtonGroup>
+
           <Flex
             as="a"
             target="_blank"
@@ -66,12 +69,7 @@ const TopNavigator = () => {
               <FaInstagram />
             </Button>
           </Flex>
-          {Object.entries(NAV_ROUTES).map(([label, url]) => (
-            <Link key={label} href={url}>
-              <Button textTransform="capitalize">{label}</Button>
-            </Link>
-          ))}
-        </ButtonGroup>
+        </HStack>
       ) : (
         <DrawerButton />
       )}

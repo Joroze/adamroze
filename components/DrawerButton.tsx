@@ -1,5 +1,6 @@
 import {
   Button,
+  Divider,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -13,7 +14,6 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import { useRef } from 'react';
 import { FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { FiMenu } from 'react-icons/fi';
 import { NAV_ROUTES } from '../lib/routes';
@@ -36,8 +36,23 @@ const DrawerButton = () => {
           <DrawerHeader />
 
           <DrawerBody>
-            <VStack alignItems="flex-start">
-              <HStack>
+            <VStack spacing={4} alignItems="flex-start">
+              {Object.entries(NAV_ROUTES).map(([label, url]) => (
+                <Link key={label} href={url}>
+                  <Button
+                    textTransform="capitalize"
+                    onClick={onClose}
+                    minWidth="unset"
+                    variant="link"
+                    size="lg"
+                    colorScheme="black"
+                  >
+                    {label}
+                  </Button>
+                </Link>
+              ))}
+              <Divider />
+              <HStack spacing={4}>
                 <Flex
                   as="a"
                   target="_blank"
@@ -69,20 +84,6 @@ const DrawerButton = () => {
                   </Button>
                 </Flex>
               </HStack>
-              {Object.entries(NAV_ROUTES).map(([label, url]) => (
-                <Link key={label} href={url}>
-                  <Button
-                    textTransform="capitalize"
-                    onClick={onClose}
-                    minWidth="unset"
-                    variant="link"
-                    size="lg"
-                    colorScheme="black"
-                  >
-                    {label}
-                  </Button>
-                </Link>
-              ))}
             </VStack>
           </DrawerBody>
         </DrawerContent>

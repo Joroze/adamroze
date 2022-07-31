@@ -7,7 +7,8 @@ enum ROUTES {
   not_found = '/404',
 }
 
-export const NAV_ROUTES = (({ treatments, location, results }) => ({
+export const NAV_ROUTES = (({ home, treatments, location, results }) => ({
+  home,
   treatments,
   results,
   location,
