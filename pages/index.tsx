@@ -21,6 +21,7 @@ import { FlexMotion } from './results';
 
 export function Index({
   actionShotBlur,
+  heroShotBlur,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Box bgColor="white" as="section">
@@ -32,7 +33,7 @@ export function Index({
           bgColor="white"
         >
           <Box p={{ base: 4, md: 8 }}>
-            <Box p={6} borderRadius="30px" bgColor="#f0f1ed">
+            <Box p={6} borderRadius="30px" bgColor="#f8f6ef">
               <SimpleGrid
                 spacing={10}
                 gridTemplateRows={{ base: '50%', md: '100%' }}
@@ -46,7 +47,7 @@ export function Index({
                   <VStack
                     zIndex="1"
                     paddingLeft={{ base: undefined, xl: 16 }}
-                    gap={4}
+                    spacing={6}
                   >
                     <Heading
                       display={[
@@ -58,7 +59,7 @@ export function Index({
                       sx={{
                         wordSpacing: [null, '9999rem', '9999rem', '9999rem'],
                       }}
-                      color="#ce964c"
+                      color="#d3801a"
                       as="h1"
                       size={['2xl', '3xl', '2xl', '3xl']}
                     >
@@ -69,8 +70,8 @@ export function Index({
                       want to look their best, and who prioritize prevention,
                       proper maintenance and a lot of self love.
                     </Text>
-                    <Box width="100%">
-                      <ContactFormButton colorScheme="yellow" variant="outline">
+                    <Box paddingTop={'10px'} width="100%">
+                      <ContactFormButton colorScheme="orange" variant="outline">
                         Book an appointment
                       </ContactFormButton>
                     </Box>
@@ -85,11 +86,11 @@ export function Index({
                     bottom={{ base: '-50%', md: '0' }}
                     isolation="isolate"
                     overflow="hidden"
-                    whileTap={{ scale: 0.95 }}
                     whileHover={{
                       scale: 1.02,
                       transition: { duration: 0.3 },
                     }}
+                    boxShadow="2xl"
                   >
                     <Box
                       pointerEvents="none"
@@ -142,26 +143,44 @@ export function Index({
             </Box>
           </Flex>
         </Flex>
-        <Divider />
-
-        <List px={8} spacing={3}>
-          <ListItem>
-            <b>Adam Rosenberg</b> is a Board Certified Physician Assistant based
-            in NYC.
-          </ListItem>
-          <ListItem>
-            <ListIcon as={FcSearch} color="green.500" />
-            Originally surgically and procedurally trained, Adam aims for
-            precise and detailed results cosmetically.{' '}
-          </ListItem>
-          <ListItem>
-            <ListIcon as={FcPortraitMode} color="green.500" />
-            Adam is experienced with Botox injections for aesthetic
-            results/facial balancing as well as medical indications including
-            chronic migraines, jaw pain and excessive sweating.{' '}
-          </ListItem>
-        </List>
-
+        <Box width="100%" height="250px" position="relative">
+          <Image
+            placeholder="blur"
+            blurDataURL={heroShotBlur}
+            objectFit="cover"
+            layout="fill"
+            alt="hero shot"
+            src="/assets/images/hero.jpg"
+          />
+        </Box>
+        <VStack spacing={6}>
+          <Heading
+            fontFamily="Raleway"
+            fontWeight="extrabold"
+            textAlign="center"
+            fontSize="2xl"
+            as="h2"
+          >
+            Adam Rosenberg, PA-C
+          </Heading>
+          <List px={8} spacing={3}>
+            <ListItem>
+              <b>Adam Rosenberg</b> is a Board Certified Physician Assistant
+              based in NYC.
+            </ListItem>
+            <ListItem>
+              <ListIcon as={FcSearch} color="green.500" />
+              Originally surgically and procedurally trained, Adam aims for
+              precise and detailed results cosmetically.{' '}
+            </ListItem>
+            <ListItem>
+              <ListIcon as={FcPortraitMode} color="green.500" />
+              Adam is experienced with Botox injections for aesthetic
+              results/facial balancing as well as medical indications including
+              chronic migraines, jaw pain and excessive sweating.{' '}
+            </ListItem>
+          </List>
+        </VStack>
         <Divider />
         <VStack spacing={10} px={8}>
           <Features />
@@ -181,13 +200,20 @@ export const getStaticProps = async ({
   params,
   preview = false,
 }: GetStaticPropsContext) => {
-  const { base64 } = await getPlaiceholder('/assets/images/actionshot.jpg', {
-    size: 10,
-  });
+  const [{ base64: actionShotBase64 }, { base64: heroShotBase64 }] =
+    await Promise.all([
+      await getPlaiceholder('/assets/images/actionshot.jpg', {
+        size: 10,
+      }),
+      await getPlaiceholder('/assets/images/hero.jpg', {
+        size: 10,
+      }),
+    ]);
 
   return {
     props: {
-      actionShotBlur: base64,
+      actionShotBlur: actionShotBase64,
+      heroShotBlur: heroShotBase64,
     },
     revalidate: 86400, // 24 hours
   };
