@@ -250,7 +250,7 @@ export default function ContactFormButton(props: ButtonProps) {
                           )}
                         </Flex>
                       ) : (
-                        <VStack>
+                        <Flex flexDir="column" gap={3}>
                           <Dropzone
                             multiple={false}
                             maxFiles={1}
@@ -259,12 +259,10 @@ export default function ContactFormButton(props: ButtonProps) {
                             }}
                             accept={{ 'image/*': [], 'application/pdf': [] }}
                           />
-                          <Box width="100%">
-                            <Text fontStyle="italic" fontSize="xs">
-                              * File type must be image or PDF
-                            </Text>
-                          </Box>
-                        </VStack>
+                          <Text fontStyle="italic" fontSize="xs">
+                            * File type must be image or PDF
+                          </Text>
+                        </Flex>
                       )
                     }
                   />
