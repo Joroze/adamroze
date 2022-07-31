@@ -43,20 +43,27 @@ export function Results({
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Image
-                      placeholder="blur"
-                      blurDataURL={post.blurDataURL}
-                      priority={index <= 2 ? true : false}
-                      objectFit="contain"
-                      width="300px"
-                      height="300px"
-                      alt="picture"
-                      src={
-                        post.mediaType === 'VIDEO'
-                          ? post.thumbnailUrl
-                          : post.mediaUrl
-                      }
-                    />
+                    <Box
+                      pointerEvents="none"
+                      sx={{
+                        'user-select': 'none',
+                      }}
+                    >
+                      <Image
+                        placeholder="blur"
+                        blurDataURL={post.blurDataURL}
+                        priority={index <= 2 ? true : false}
+                        objectFit="contain"
+                        width="300px"
+                        height="300px"
+                        alt="picture"
+                        src={
+                          post.mediaType === 'VIDEO'
+                            ? post.thumbnailUrl
+                            : post.mediaUrl
+                        }
+                      />
+                    </Box>
                   </FlexMotion>
                 );
               })}

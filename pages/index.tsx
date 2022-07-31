@@ -91,14 +91,21 @@ export function Index({
                       transition: { duration: 0.3 },
                     }}
                   >
-                    <Image
-                      placeholder="blur"
-                      blurDataURL={actionShotBlur}
-                      objectFit="cover"
-                      layout="fill"
-                      alt="action shot"
-                      src="/assets/images/actionshot.jpg"
-                    />
+                    <Box
+                      pointerEvents="none"
+                      sx={{
+                        'user-select': 'none',
+                      }}
+                    >
+                      <Image
+                        placeholder="blur"
+                        blurDataURL={actionShotBlur}
+                        objectFit="cover"
+                        layout="fill"
+                        alt="action shot"
+                        src="/assets/images/actionshot.jpg"
+                      />
+                    </Box>
                   </FlexMotion>
                 </Box>
               </SimpleGrid>
