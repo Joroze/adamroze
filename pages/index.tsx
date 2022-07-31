@@ -92,12 +92,7 @@ export function Index({
                     }}
                     boxShadow="2xl"
                   >
-                    <Box
-                      pointerEvents="none"
-                      sx={{
-                        'user-select': 'none',
-                      }}
-                    >
+                    <Box pointerEvents="none" userSelect="none">
                       <Image
                         placeholder="blur"
                         blurDataURL={actionShotBlur}
@@ -143,7 +138,14 @@ export function Index({
             </Box>
           </Flex>
         </Flex>
-        <Box width="100%" height="250px" position="relative">
+        <Box
+          pointerEvents="none"
+          userSelect="none"
+          filter="saturate(.9)"
+          width="100%"
+          height={{ base: '250px', md: '275px', lg: '300px', xl: '325px' }}
+          position="relative"
+        >
           <Image
             placeholder="blur"
             blurDataURL={heroShotBlur}
