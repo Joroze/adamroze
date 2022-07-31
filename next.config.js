@@ -1,9 +1,8 @@
 /** @type {import('next').NextConfig} */
 
 import { withPlaiceholder } from '@plaiceholder/next';
-import { NextConfig } from 'next';
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   swcMinify: true,
   reactStrictMode: true,
   poweredByHeader: false,
