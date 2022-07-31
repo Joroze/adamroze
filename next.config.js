@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-import { withPlaiceholder } from '@plaiceholder/next';
+const { withPlaiceholder } = require('@plaiceholder/next');
 
 const nextConfig = {
   swcMinify: true,
