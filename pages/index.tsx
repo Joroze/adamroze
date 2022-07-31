@@ -1,5 +1,6 @@
 import {
   Box,
+  Container,
   Divider,
   Flex,
   Heading,
@@ -12,6 +13,7 @@ import Image from 'next/image';
 import { getPlaiceholder } from 'plaiceholder';
 import ContactFormButton from '../components/ContactFormButton';
 import Features from '../components/Features';
+import { FlexMotion } from './results';
 
 export function Index({
   actionShotBlur,
@@ -19,71 +21,86 @@ export function Index({
   return (
     <Box color="white" as="section">
       <Flex gap={12} flexDir="column">
-        <Box marginBottom={{ base: undefined, md: '75px' }} />
-        <Box>
-          <SimpleGrid
-            spacing={10}
-            gridTemplateRows={{ base: '55%', md: '100%' }}
-            columns={{ base: 1, md: 2 }}
-            height="550px"
-          >
-            <Box alignItems="center" display="flex">
-              <VStack
-                padding={[4, 4, null, null]}
-                paddingLeft={{ base: undefined, md: 16 }}
-                gap={4}
+        <Flex
+          flexDir="column"
+          gap={{ base: '100px', md: 12 }}
+          color="black"
+          bgColor="white"
+        >
+          <Box p={8}>
+            <Box p={6} borderRadius="30px" bgColor="#f0f1ed">
+              <SimpleGrid
+                spacing={10}
+                gridTemplateRows={{ base: '55%', md: '100%' }}
+                columns={{ base: 1, md: 2 }}
+                height={{ base: '700px', md: '600px' }}
               >
-                <Heading
-                  display={[
-                    null,
-                    'table-caption',
-                    'table-caption',
-                    'table-caption',
-                  ]}
-                  sx={{
-                    wordSpacing: [null, '9999rem', '9999rem', '9999rem'],
-                  }}
-                  color="#d5b488"
-                  as="h1"
-                  size={['2xl', '3xl', '2xl', '3xl']}
-                >
-                  MEDICAL AESTHETICS MADE MODERN.
-                </Heading>
-                <Text>
-                  Specializing in medical-grade treatments for people who want
-                  to look their best, and who prioritize prevention, proper
-                  maintenance and a lot of self love.
-                </Text>
-                <Box width="100%">
-                  <ContactFormButton
-                    backgroundColor="#96978a2e"
-                    colorScheme="gray"
-                    variant="outline"
+                <Box alignItems="center" display="flex">
+                  <VStack
+                    padding={[4, 4, null, null]}
+                    paddingLeft={{ base: undefined, xl: 16 }}
+                    gap={4}
                   >
-                    Book an appointment
-                  </ContactFormButton>
+                    <Heading
+                      display={[
+                        null,
+                        'table-caption',
+                        'table-caption',
+                        'table-caption',
+                      ]}
+                      sx={{
+                        wordSpacing: [null, '9999rem', '9999rem', '9999rem'],
+                      }}
+                      color="#ce964c"
+                      as="h1"
+                      size={['2xl', '3xl', '2xl', '3xl']}
+                    >
+                      MEDICAL AESTHETICS MADE MODERN.
+                    </Heading>
+                    <Text>
+                      Specializing in medical-grade treatments for people who
+                      want to look their best, and who prioritize prevention,
+                      proper maintenance and a lot of self love.
+                    </Text>
+                    <Box width="100%">
+                      <ContactFormButton
+                        // backgroundColor="#96978a2e"
+                        colorScheme="yellow"
+                        variant="outline"
+                      >
+                        Book an appointment
+                      </ContactFormButton>
+                    </Box>
+                  </VStack>
                 </Box>
-              </VStack>
+                <Box display="flex" justifyContent="center" position="relative">
+                  <FlexMotion
+                    borderRadius="30px"
+                    width="100%"
+                    height="100%"
+                    position="absolute"
+                    bottom={{ base: '-50%', md: '0' }}
+                    isolation="isolate"
+                    overflow="hidden"
+                    whileTap={{ scale: 0.95 }}
+                    whileHover={{
+                      scale: 1.02,
+                      transition: { duration: 0.3 },
+                    }}
+                  >
+                    <Image
+                      placeholder="blur"
+                      blurDataURL={actionShotBlur}
+                      objectFit="cover"
+                      layout="fill"
+                      alt="action shot"
+                      src="/assets/images/actionshot.jpg"
+                    />
+                  </FlexMotion>
+                </Box>
+              </SimpleGrid>
             </Box>
-            <Box
-              width="100%"
-              height="100%"
-              position="relative"
-              isolation="isolate"
-              display="flex"
-              overflow="hidden"
-              borderLeftRadius={{ base: undefined, md: '3px' }}
-            >
-              <Image
-                placeholder="blur"
-                blurDataURL={actionShotBlur}
-                objectFit="cover"
-                layout="fill"
-                alt="action shot"
-                src="/assets/images/actionshot.jpg"
-              />
-            </Box>
-          </SimpleGrid>
+          </Box>
           <Flex
             justifyContent="center"
             alignItems="center"
@@ -105,7 +122,7 @@ export function Index({
               </Text>
             </Box>
           </Flex>
-        </Box>
+        </Flex>
         <Flex px={8} gap={2} flexDir="column">
           <Text>
             Adam Rosenberg is a Board Certified Physician Assistant based in

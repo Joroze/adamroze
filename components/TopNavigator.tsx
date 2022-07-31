@@ -6,11 +6,16 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { NAV_ROUTES } from '../lib/routes';
 import DrawerButton from './DrawerButton';
 
 const TopNavigator = () => {
+  const router = useRouter();
+  const isHomePageRoute = router.pathname === '/';
+  const buttonColor = isHomePageRoute ? 'black' : 'orange.100';
+
   // const isLarge = useBreakpointValue({ md: true });
 
   // const { colorMode, toggleColorMode } = useColorMode();
@@ -28,8 +33,9 @@ const TopNavigator = () => {
       boxShadow="xl"
       height="75px"
       width="100%"
-      color="white"
+      color={isHomePageRoute ? undefined : 'white'}
       alignItems="center"
+      bgColor={isHomePageRoute ? 'white' : undefined}
     >
       <Link passHref href="/">
         <a>
@@ -46,7 +52,7 @@ const TopNavigator = () => {
             rel="noopener noreferrer"
             href="https://www.linkedin.com/in/adamrosepa/"
           >
-            <Button variant="link" color="orange.100" aria-label="linked-in">
+            <Button variant="link" color={buttonColor} aria-label="linked-in">
               <FaLinkedin />
             </Button>
           </Flex>
@@ -56,7 +62,7 @@ const TopNavigator = () => {
             rel="noopener noreferrer"
             href="https://www.instagram.com/sculptedbyadam/"
           >
-            <Button variant="link" color="orange.100" aria-label="instagram">
+            <Button variant="link" color={buttonColor} aria-label="instagram">
               <FaInstagram />
             </Button>
           </Flex>

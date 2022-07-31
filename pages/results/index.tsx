@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { getPlaiceholder } from 'plaiceholder';
 import { faker } from '@faker-js/faker';
 
-const FlexMotion = motion(Flex);
+export const FlexMotion = motion(Flex);
 
 export function Results({
   instagramPosts,
