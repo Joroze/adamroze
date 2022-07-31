@@ -24,7 +24,7 @@ export const Feature = ({ title, text, icon }: FeatureProps) => {
         {icon}
       </Flex>
       <Text fontWeight={600}>{title}</Text>
-      <Text color={'gray.50'}>{text}</Text>
+      <Text>{text}</Text>
     </Stack>
   );
 };
@@ -40,7 +40,7 @@ export default function Features() {
             Making an appointment is easy. Book us through our website, or reach
             out to us on{' '}
             <Link
-              color="Highlight"
+              color="blue.500"
               target="_blank"
               rel="noopener noreferrer"
               href={'https://www.instagram.com/sculptedbyadam/'}

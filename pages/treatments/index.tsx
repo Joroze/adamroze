@@ -11,6 +11,7 @@ import {
   HStack,
   VStack,
   Flex,
+  Tag,
 } from '@chakra-ui/react';
 import { FcCheckmark } from 'react-icons/fc';
 
@@ -90,7 +91,20 @@ function Treatment({ title, text, price, coveredByInsurance }: Treatment) {
       <VStack align={'start'}>
         <Text fontWeight={600}>
           {title}
-          {price && <Text as="span">: ${price}/unit</Text>}
+          {price && (
+            <Text as="span">
+              :{' '}
+              <Tag
+                color="green.200"
+                colorScheme="green"
+                variant="outline"
+                p={1}
+                size="md"
+              >
+                ${price}/unit
+              </Tag>
+            </Text>
+          )}
         </Text>
         <Text color="white">{text}</Text>
         {coveredByInsurance && (

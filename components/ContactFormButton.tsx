@@ -22,6 +22,7 @@ import {
   Tooltip,
   useDisclosure,
   useMergeRefs,
+  useToast,
   VStack,
 } from '@chakra-ui/react';
 import { FcApproval } from 'react-icons/fc';
@@ -58,6 +59,7 @@ export default function ContactFormButton(props: ButtonProps) {
   const { reward, isAnimating } = useReward('rewardId', 'confetti');
   const [apiError, setApiError] = useState(false);
   const form = useForm<ContactFormValues>();
+  const toast = useToast();
   const {
     handleSubmit,
     register,
@@ -93,9 +95,23 @@ export default function ContactFormButton(props: ButtonProps) {
         body: formData,
       }).then(manageErrors);
 
+      toast({
+        title: 'Sent',
+        description: "You'll hear from us shortly.",
+        status: 'success',
+        duration: 6000,
+        isClosable: true,
+      });
       reward();
     } catch (error) {
       setApiError(true);
+      toast({
+        title: 'Oops',
+        description: 'Something went wrong. Try again.',
+        status: 'error',
+        duration: 6000,
+        isClosable: true,
+      });
       console.error(error);
     }
   }

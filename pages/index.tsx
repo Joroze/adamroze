@@ -1,9 +1,12 @@
 import {
   Box,
-  Container,
   Divider,
   Flex,
   Heading,
+  Highlight,
+  List,
+  ListIcon,
+  ListItem,
   SimpleGrid,
   Text,
   VStack,
@@ -11,6 +14,7 @@ import {
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import { getPlaiceholder } from 'plaiceholder';
+import { FcPortraitMode, FcSearch } from 'react-icons/fc';
 import ContactFormButton from '../components/ContactFormButton';
 import Features from '../components/Features';
 import { FlexMotion } from './results';
@@ -19,28 +23,27 @@ export function Index({
   actionShotBlur,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <Box color="white" as="section">
+    <Box bgColor="white" as="section">
       <Flex gap={12} flexDir="column">
         <Flex
           flexDir="column"
-          gap={{ base: '100px', md: 12 }}
+          gap={{ base: '150px', md: 12 }}
           color="black"
           bgColor="white"
         >
-          <Box p={8}>
+          <Box p={{ base: 4, md: 8 }}>
             <Box p={6} borderRadius="30px" bgColor="#f0f1ed">
               <SimpleGrid
                 spacing={10}
-                gridTemplateRows={{ base: '55%', md: '100%' }}
+                gridTemplateRows={{ base: '50%', md: '100%' }}
                 columns={{ base: 1, md: 2 }}
-                height={{ base: '700px', md: '600px' }}
               >
-                <Box alignItems="center" display="flex">
-                  <VStack
-                    padding={[4, 4, null, null]}
-                    paddingLeft={{ base: undefined, xl: 16 }}
-                    gap={4}
-                  >
+                <Box
+                  mt={{ base: '150px', sm: undefined }}
+                  alignItems="center"
+                  display="flex"
+                >
+                  <VStack paddingLeft={{ base: undefined, xl: 16 }} gap={4}>
                     <Heading
                       display={[
                         null,
@@ -63,11 +66,7 @@ export function Index({
                       proper maintenance and a lot of self love.
                     </Text>
                     <Box width="100%">
-                      <ContactFormButton
-                        // backgroundColor="#96978a2e"
-                        colorScheme="yellow"
-                        variant="outline"
-                      >
+                      <ContactFormButton colorScheme="yellow" variant="outline">
                         Book an appointment
                       </ContactFormButton>
                     </Box>
@@ -113,40 +112,50 @@ export function Index({
                 fontFamily="Raleway"
                 fontWeight="extrabold"
                 textAlign="center"
-                fontSize={['3xl', '5xl', '6xl', '6xl', '6xl']}
+                fontSize={{ base: '3xl', sm: '5xl', md: '6xl' }}
                 color="blue.800"
                 bgGradient="linear(to-l, blue.900, #6a583e)"
                 bgClip="text"
               >
-                Changing The Face Of Medical Aesthetics
+                <Highlight
+                  query="face"
+                  styles={{
+                    px: '4',
+                    rounded: 'full',
+                    bg: 'orange.100',
+                  }}
+                >
+                  Changing The Face Of Medical Aesthetics
+                </Highlight>
               </Text>
             </Box>
           </Flex>
         </Flex>
-        <Flex px={8} gap={2} flexDir="column">
-          <Text>
-            Adam Rosenberg is a Board Certified Physician Assistant based in
-            NYC.
-          </Text>
-          <Text>
-            Originally surgically and procedurally trained, he aims for precise
-            and detailed results cosmetically.
-          </Text>
-          <Text>
+        <Divider />
+
+        <List px={8} spacing={3}>
+          <ListItem>
+            <b>Adam Rosenberg</b> is a Board Certified Physician Assistant based
+            in NYC.
+          </ListItem>
+          <ListItem>
+            <ListIcon as={FcSearch} color="green.500" />
+            Originally surgically and procedurally trained, Adam aims for
+            precise and detailed results cosmetically.{' '}
+          </ListItem>
+          <ListItem>
+            <ListIcon as={FcPortraitMode} color="green.500" />
             Adam is experienced with Botox injections for aesthetic
             results/facial balancing as well as medical indications including
-            chronic migraines, jaw pain and excessive sweating.
-          </Text>
-        </Flex>
+            chronic migraines, jaw pain and excessive sweating.{' '}
+          </ListItem>
+        </List>
+
         <Divider />
         <VStack spacing={10} px={8}>
           <Features />
           <Box>
-            <ContactFormButton
-              backgroundColor="#96978a2e"
-              colorScheme="gray"
-              variant="outline"
-            >
+            <ContactFormButton colorScheme="blue" variant="outline">
               Book an appointment
             </ContactFormButton>
           </Box>
