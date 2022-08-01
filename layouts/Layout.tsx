@@ -29,9 +29,13 @@ const Layout = ({ metaTags, children }: Props) => {
       </Head>
       <TopNavigator />
       <Box as="main" flexGrow={1} backgroundColor="#394e68">
-        <SlideFade key={router.route} in>
-          {children}
-        </SlideFade>
+        {router.pathname === '/' ? (
+          children
+        ) : (
+          <SlideFade key={router.route} in>
+            {children}
+          </SlideFade>
+        )}
       </Box>
       <Footer />
     </>
