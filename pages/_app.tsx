@@ -1,5 +1,8 @@
 import './styles.scss';
 import './nprogress.scss';
+import '@fontsource/inter';
+import '@fontsource/raleway';
+import '@fontsource/open-sans';
 
 import NProgress from 'nprogress';
 import { AppProps } from 'next/app';

@@ -92,7 +92,13 @@ export function Index({
                     }}
                     boxShadow="2xl"
                   >
-                    <Box pointerEvents="none" userSelect="none">
+                    <Box
+                      width="100%"
+                      height="100%"
+                      position="relative"
+                      pointerEvents="none"
+                      userSelect="none"
+                    >
                       <Image
                         placeholder="blur"
                         blurDataURL={actionShotBlur}
