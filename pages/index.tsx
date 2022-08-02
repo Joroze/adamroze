@@ -33,12 +33,7 @@ export function Index({
           bgColor="white"
         >
           <Box p={{ base: 0, sm: 5, md: 8 }}>
-            <Box
-              p={6}
-              borderRadius={{ base: 0, sm: '30px' }}
-              bgGradient={{ base: 'linear(#f8f6ef 95%, white)', sm: 'none' }}
-              bgColor="#f8f6ef"
-            >
+            <Box p={6} borderRadius={{ base: 0, sm: '30px' }} bgColor="#f8f6ef">
               <SimpleGrid
                 spacing={10}
                 gridTemplateRows={{ base: '50%', md: '100%' }}
