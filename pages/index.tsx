@@ -104,6 +104,8 @@ export function Index({
                         blurDataURL={actionShotBlur}
                         objectFit="cover"
                         layout="fill"
+                        priority
+                        draggable={false}
                         alt="action shot"
                         src="/assets/images/actionshot.jpg"
                       />
@@ -157,6 +159,7 @@ export function Index({
             blurDataURL={heroShotBlur}
             objectFit="cover"
             layout="fill"
+            draggable={false}
             alt="hero shot"
             src="/assets/images/hero.jpg"
           />
