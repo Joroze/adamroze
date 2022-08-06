@@ -95,7 +95,10 @@ function CustomApp({ Component, pageProps }: AppPropsWithLayout) {
     <ChakraProvider resetCSS theme={themeWithFont}>
       <Head>
         <title>{fullWebsiteTitle}</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta
+          name="viewport"
+          content="initial-scale=1.0, width=device-width, viewport-fit=cover"
+        />
         {/* <!-- Primary Meta Tags --> */}
         <meta name="title" content={fullWebsiteTitle} />
         {/* <!-- Open Graph / Facebook --> */}

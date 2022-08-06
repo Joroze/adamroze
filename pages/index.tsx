@@ -294,7 +294,8 @@ export function Index({
             bgClip="text"
             textTransform="uppercase"
             as="h2"
-            fontSize={'3xl'}
+            fontSize="3xl"
+            textAlign="center"
           >
             Follow our results
           </Heading>
@@ -324,8 +325,8 @@ export function Index({
                           target="_blank"
                           rel="noopener noreferrer"
                           pos="relative"
-                          height="300px"
-                          width="300px"
+                          width={{ base: '175px', md: '200px' }}
+                          height={{ base: '175px', md: '200px' }}
                         >
                           <Image
                             placeholder={post.blurDataURL ? 'blur' : 'empty'}
