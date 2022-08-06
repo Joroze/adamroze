@@ -4,8 +4,7 @@ import { useRouter } from 'next/router';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { getPlaiceholder } from 'plaiceholder';
-import { faker } from '@faker-js/faker';
+import { getInstagramPosts } from '../../lib/api';
 
 export const FlexMotion = motion(Flex);
 
@@ -43,19 +42,15 @@ export function Results({
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Box
-                      pointerEvents="none"
-                      sx={{
-                        'user-select': 'none',
-                      }}
-                    >
+                    <Box pointerEvents="none" userSelect="none">
                       <Image
-                        placeholder="blur"
+                        placeholder={post.blurDataURL ? 'blur' : 'empty'}
                         blurDataURL={post.blurDataURL}
                         priority={index <= 2 ? true : false}
                         objectFit="contain"
                         width="300px"
                         height="300px"
+                        draggable={false}
                         alt="picture"
                         src={
                           post.mediaType === 'VIDEO'
@@ -75,68 +70,11 @@ export function Results({
   );
 }
 
-type MediaType = 'IMAGE' | 'VIDEO';
-
-type CarouselAlbumEntity = {
-  id: string;
-  mediaUrl: string;
-  mediaType: MediaType;
-};
-
-type InstagramPost = {
-  id: string;
-  mediaUrl: string;
-  permalink: string;
-  caption: string;
-  mediaType: MediaType;
-  thumbnailUrl: string;
-  timestamp: string;
-  children: CarouselAlbumEntity[];
-};
-
 export const getStaticProps = async ({
   params,
   preview = false,
 }: GetStaticPropsContext) => {
-  const isDevelopmentMode = process.env.NODE_ENV === 'development';
-  const data: InstagramPost[] = isDevelopmentMode
-    ? [...new Array(10)].map(() => ({
-        caption: '',
-        id: faker.datatype.uuid(),
-        mediaType: 'IMAGE',
-        mediaUrl: faker.image.cats(undefined, undefined, true),
-      }))
-    : await fetch(
-        `https://feeds.behold.so/${process.env.BEHOLD_INSTAGRAM_API_ENDPOINT}`
-      ).then((data) => data.json());
-
-  const instagramPostsFlattened = data.reduce<InstagramPost[]>((acc, val) => {
-    if (val.children) {
-      acc.push(
-        ...val.children
-          .filter((child) => child.mediaType === 'IMAGE')
-          .map((child) => ({
-            ...val,
-            ...child,
-          }))
-      );
-    } else {
-      acc.push(val);
-    }
-
-    return acc;
-  }, []);
-
-  const instagramPosts = await Promise.all(
-    instagramPostsFlattened.map(async (post) => {
-      const { base64 } = await getPlaiceholder(post.mediaUrl, { size: 10 });
-
-      return {
-        ...post,
-        blurDataURL: base64,
-      };
-    })
-  );
+  const instagramPosts = await getInstagramPosts();
 
   return {
     props: {
