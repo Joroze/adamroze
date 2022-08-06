@@ -208,13 +208,13 @@ export function Index({
                     changePositionOnHover
                     itemOne={
                       <ReactCompareSliderImage
-                        src="/assets/images/before.jpg"
+                        src="/assets/images/after.jpg"
                         alt="Before"
                       />
                     }
                     itemTwo={
                       <ReactCompareSliderImage
-                        src="/assets/images/after.jpg"
+                        src="/assets/images/before.jpg"
                         alt="After"
                       />
                     }
