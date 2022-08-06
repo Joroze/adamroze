@@ -205,6 +205,7 @@ export function Index({
                 </Text>
                 <Box>
                   <ReactCompareSlider
+                    changePositionOnHover
                     itemOne={
                       <ReactCompareSliderImage
                         src="/assets/images/before.jpg"
