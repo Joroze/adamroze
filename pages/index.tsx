@@ -294,7 +294,7 @@ export function Index({
             bgClip="text"
             textTransform="uppercase"
             as="h2"
-            fontSize="3xl"
+            fontSize={{ base: '2xl', md: '3xl' }}
             textAlign="center"
           >
             Follow our results
