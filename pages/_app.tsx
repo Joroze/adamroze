@@ -8,13 +8,13 @@ import NProgress from 'nprogress';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
 import Layout from '../layouts/Layout';
 import { useEffect } from 'react';
 import Router, { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { getLastSegmentInPath } from '../lib/routes';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const themeWithFont = extendTheme({
   fonts: {
