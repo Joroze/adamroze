@@ -10,6 +10,7 @@ import formidable from 'formidable';
 import { readFile } from 'fs/promises';
 
 export const config = {
+  runtime: 'experimental-edge',
   api: {
     bodyParser: false,
   },

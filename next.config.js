@@ -1,22 +1,19 @@
-/** @type {import('next').NextConfig} */
-
 const { withPlaiceholder } = require('@plaiceholder/next');
 
+/** @type {import('next').NextConfig}*/
 const nextConfig = {
   swcMinify: true,
   reactStrictMode: true,
   poweredByHeader: false,
-
-  experimental: {
-    images: {
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: '**.cdninstagram.com',
-        },
-      ],
-    },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.cdninstagram.com',
+      },
+    ],
   },
+  experimental: {},
   images: {
     formats: ['image/avif', 'image/webp'],
     domains: ['loremflickr.com'],
