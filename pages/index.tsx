@@ -12,9 +12,11 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
+import { useInView } from 'framer-motion';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import { getPlaiceholder } from 'plaiceholder';
+import { useRef } from 'react';
 import {
   ReactCompareSlider,
   ReactCompareSliderImage,
@@ -26,6 +28,25 @@ import Features from '../components/Features';
 import { getInstagramPosts } from '../lib/api';
 import { loaderProp } from '../lib/utilites';
 import { FlexMotion } from './results';
+
+function AnimatedSection({ children }: { children: React.ReactNode }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  return (
+    <section ref={ref}>
+      <Box
+        style={{
+          transform: isInView ? 'none' : 'translateX(200px)',
+          opacity: isInView ? 1 : 0,
+          transition: 'all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s',
+        }}
+      >
+        {children}
+      </Box>
+    </section>
+  );
+}
 
 export function Index({
   actionShotBlur,
@@ -132,28 +153,30 @@ export function Index({
             minHeight={{ base: undefined, sm: '300px', md: '400px' }}
             bgColor="white"
           >
-            <Box maxWidth={{ base: '295px', sm: '400px', md: '500px' }}>
-              <Text
-                fontFamily="Raleway"
-                fontWeight="extrabold"
-                textAlign="center"
-                fontSize={{ base: '3xl', sm: '5xl', md: '6xl' }}
-                color="blue.800"
-                bgGradient="linear(to-l, blue.900, #6a583e)"
-                bgClip="text"
-              >
-                <Highlight
-                  query="face"
-                  styles={{
-                    px: '4',
-                    rounded: 'full',
-                    bg: 'orange.100',
-                  }}
+            <AnimatedSection>
+              <Box maxWidth={{ base: '295px', sm: '400px', md: '500px' }}>
+                <Text
+                  fontFamily="Raleway"
+                  fontWeight="extrabold"
+                  textAlign="center"
+                  fontSize={{ base: '3xl', sm: '5xl', md: '6xl' }}
+                  color="blue.800"
+                  bgGradient="linear(to-l, blue.900, #6a583e)"
+                  bgClip="text"
                 >
-                  Changing The Face Of Medical Aesthetics
-                </Highlight>
-              </Text>
-            </Box>
+                  <Highlight
+                    query="face"
+                    styles={{
+                      px: '4',
+                      rounded: 'full',
+                      bg: 'orange.100',
+                    }}
+                  >
+                    Changing The Face Of Medical Aesthetics
+                  </Highlight>
+                </Text>
+              </Box>
+            </AnimatedSection>
           </Flex>
         </Flex>
 
