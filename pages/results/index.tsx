@@ -5,7 +5,6 @@ import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { getInstagramPosts } from '../../lib/api';
-import { loaderProp } from '../../lib/utilites';
 
 export const FlexMotion = motion(Flex);
 
@@ -45,7 +44,6 @@ export function Results({
                   >
                     <Box pointerEvents="none" userSelect="none">
                       <Image
-                        loader={loaderProp}
                         placeholder={post.blurDataURL ? 'blur' : 'empty'}
                         blurDataURL={post.blurDataURL}
                         priority={index <= 2 ? true : false}

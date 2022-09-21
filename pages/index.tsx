@@ -26,7 +26,6 @@ import { FcPortraitMode, FcSearch } from 'react-icons/fc';
 import ContactFormButton from '../components/ContactFormButton';
 import Features from '../components/Features';
 import { getInstagramPosts } from '../lib/api';
-import { loaderProp } from '../lib/utilites';
 import { FlexMotion } from './results';
 
 function AnimatedSection({ children }: { children: React.ReactNode }) {
@@ -353,7 +352,6 @@ export function Index({
                           height={{ base: '175px', md: '200px' }}
                         >
                           <Image
-                            loader={loaderProp}
                             placeholder={post.blurDataURL ? 'blur' : 'empty'}
                             layout="fill"
                             blurDataURL={post.blurDataURL}
