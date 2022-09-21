@@ -133,7 +133,7 @@ export default function ContactFormButton(props: ButtonProps) {
 
       <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay
-          bg="blackAlpha.200"
+          bg="blackAlpha.400"
           backdropFilter="blur(2px) hue-rotate(-10deg)"
         />
         <ModalContent>
