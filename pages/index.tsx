@@ -5,6 +5,8 @@ import {
   Flex,
   Heading,
   Highlight,
+  Icon,
+  Link,
   List,
   ListIcon,
   ListItem,
@@ -22,6 +24,8 @@ import {
   ReactCompareSliderImage,
 } from 'react-compare-slider';
 import Flickity from 'react-flickity-component';
+import { BsLink45Deg } from 'react-icons/bs';
+import { FaLink } from 'react-icons/fa';
 import { FcPortraitMode, FcSearch } from 'react-icons/fc';
 import ContactFormButton from '../components/ContactFormButton';
 import Features from '../components/Features';
@@ -179,18 +183,28 @@ export function Index({
           </Flex>
         </Flex>
 
-        <Divider />
+        <Divider id="info" />
 
         <VStack spacing={6}>
-          <Heading
-            color="blue.800"
-            bgGradient="linear(to-l, blue.900, #6a583e)"
-            bgClip="text"
-            as="h2"
-            fontSize="2xl"
-          >
-            Info
-          </Heading>
+          <Link href="#info">
+            <Heading
+              role="group"
+              color="blue.800"
+              bgGradient="linear(to-l, blue.900, #6a583e)"
+              bgClip="text"
+              as="h2"
+              fontSize="2xl"
+            >
+              Info
+              <Icon
+                ml={1}
+                color="black"
+                visibility="hidden"
+                _groupHover={{ visibility: 'visible' }}
+                as={BsLink45Deg}
+              />
+            </Heading>
+          </Link>
           <Container maxWidth="6xl">
             <Flex
               gap={{ base: 10, md: 0 }}
@@ -282,7 +296,6 @@ export function Index({
             src="/assets/images/hero2.jpg"
           />
         </Box>
-
         <VStack spacing={10} px={8}>
           <Features />
           <Box>
@@ -291,7 +304,50 @@ export function Index({
             </ContactFormButton>
           </Box>
         </VStack>
-        <Divider />
+        <Divider id="location" />
+
+        <VStack px={8}>
+          <Link href="#location">
+            <Heading
+              role="group"
+              color="blue.800"
+              bgGradient="linear(to-l, blue.900, #6a583e)"
+              bgClip="text"
+              as="h2"
+              fontSize="2xl"
+              mb={8}
+            >
+              Location
+              <Icon
+                ml={1}
+                color="black"
+                visibility="hidden"
+                _groupHover={{ visibility: 'visible' }}
+                as={BsLink45Deg}
+              />
+            </Heading>
+          </Link>
+
+          <Flex flexDir="column" width="100%" gap={2}>
+            <VStack>
+              <Box
+                overflow="hidden"
+                borderRadius="4px"
+                height="250px"
+                width="100%"
+              >
+                <iframe
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.327702052811!2d-73.995445!3d40.7328142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259975b41ef93%3A0xfa8234229ba42709!2s25%205th%20Ave%2C%20New%20York%2C%20NY%2010003!5e0!3m2!1sen!2sus!4v1657632297080!5m2!1sen!2sus"
+                  width="100%"
+                  height="100%"
+                  loading="lazy"
+                />
+              </Box>
+            </VStack>
+          </Flex>
+        </VStack>
         {/* <Box
           pointerEvents="none"
           userSelect="none"
@@ -310,18 +366,31 @@ export function Index({
             src="/assets/images/hero.jpg"
           />
         </Box> */}
+
+        <Divider id="results" />
+
         <VStack px={8}>
-          <Heading
-            color="blue.800"
-            bgGradient="linear(to-l, blue.900, #6a583e)"
-            bgClip="text"
-            textTransform="uppercase"
-            as="h2"
-            fontSize={{ base: '2xl', md: '3xl' }}
-            textAlign="center"
-          >
-            Follow our results
-          </Heading>
+          <Link href="#results">
+            <Heading
+              role="group"
+              color="blue.800"
+              bgGradient="linear(to-l, blue.900, #6a583e)"
+              bgClip="text"
+              textTransform="uppercase"
+              as="h2"
+              fontSize={{ base: '2xl', md: '3xl' }}
+              textAlign="center"
+            >
+              Follow our results
+              <Icon
+                ml={1}
+                color="black"
+                visibility="hidden"
+                _groupHover={{ visibility: 'visible' }}
+                as={BsLink45Deg}
+              />
+            </Heading>
+          </Link>
           <VStack width="100%">
             <Box width="100%">
               {/* @ts-ignore */}
