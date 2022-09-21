@@ -25,7 +25,6 @@ import {
 } from 'react-compare-slider';
 import Flickity from 'react-flickity-component';
 import { BsLink45Deg } from 'react-icons/bs';
-import { FaLink } from 'react-icons/fa';
 import { FcPortraitMode, FcSearch } from 'react-icons/fc';
 import ContactFormButton from '../components/ContactFormButton';
 import Features from '../components/Features';
