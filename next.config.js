@@ -6,18 +6,16 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   images: {
+    domains: ['loremflickr.com'],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: '**.cdninstagram.com',
       },
     ],
+    formats: ['image/avif', 'image/webp'],
   },
   experimental: {},
-  images: {
-    formats: ['image/avif', 'image/webp'],
-    domains: ['loremflickr.com'],
-  },
 };
 
 module.exports = withPlaiceholder(nextConfig);
