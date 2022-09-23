@@ -31,20 +31,34 @@ import Features from '../components/Features';
 import { getInstagramPosts } from '../lib/api';
 import { FlexMotion } from './results';
 
-function AnimatedSection({ children }: { children: React.ReactNode }) {
+function AnimatedSection({
+  children,
+  transition = false,
+  keepUnmounted = false,
+}: {
+  children: React.ReactNode;
+  transition?: boolean;
+  keepUnmounted?: boolean;
+}) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
   return (
     <section ref={ref}>
       <Box
-        style={{
-          transform: isInView ? 'none' : 'translateY(-150px)',
-          opacity: isInView ? 1 : 0,
-          transition: 'all 0.7s cubic-bezier(0.17, 0.55, 0.55, 1) 0.3s',
-        }}
+        style={
+          transition
+            ? {
+                transform: isInView ? 'none' : 'translateY(-150px)',
+                opacity: isInView ? 1 : 0,
+                transition: 'all 0.7s cubic-bezier(0.17, 0.55, 0.55, 1) 0.3s',
+              }
+            : {
+                opacity: isInView ? 1 : 0,
+              }
+        }
       >
-        {children}
+        {!keepUnmounted ? children : isInView && children}
       </Box>
     </section>
   );
@@ -155,7 +169,7 @@ export function Index({
             minHeight={{ base: undefined, sm: '300px', md: '400px' }}
             bgColor="white"
           >
-            <AnimatedSection>
+            <AnimatedSection transition>
               <Box maxWidth={{ base: '295px', sm: '400px', md: '500px' }}>
                 <Text
                   fontFamily="Raleway"
@@ -305,48 +319,50 @@ export function Index({
         </VStack>
         <Divider id="location" />
 
-        <VStack px={8}>
-          <Link href="#location">
-            <Heading
-              role="group"
-              color="blue.800"
-              bgGradient="linear(to-l, blue.900, #6a583e)"
-              bgClip="text"
-              as="h2"
-              fontSize="2xl"
-              mb={8}
-            >
-              Location
-              <Icon
-                ml={1}
-                color="black"
-                visibility="hidden"
-                _groupHover={{ visibility: 'visible' }}
-                as={BsLink45Deg}
-              />
-            </Heading>
-          </Link>
-
-          <Flex flexDir="column" width="100%" gap={2}>
-            <VStack>
-              <Box
-                overflow="hidden"
-                borderRadius="4px"
-                height="250px"
-                width="100%"
+        <AnimatedSection keepUnmounted>
+          <VStack px={8}>
+            <Link href="#location">
+              <Heading
+                role="group"
+                color="blue.800"
+                bgGradient="linear(to-l, blue.900, #6a583e)"
+                bgClip="text"
+                as="h2"
+                fontSize="2xl"
+                mb={8}
               >
-                <iframe
-                  allowFullScreen
-                  referrerPolicy="no-referrer-when-downgrade"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.327702052811!2d-73.995445!3d40.7328142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259975b41ef93%3A0xfa8234229ba42709!2s25%205th%20Ave%2C%20New%20York%2C%20NY%2010003!5e0!3m2!1sen!2sus!4v1657632297080!5m2!1sen!2sus"
-                  width="100%"
-                  height="100%"
-                  loading="lazy"
+                Location
+                <Icon
+                  ml={1}
+                  color="black"
+                  visibility="hidden"
+                  _groupHover={{ visibility: 'visible' }}
+                  as={BsLink45Deg}
                 />
-              </Box>
-            </VStack>
-          </Flex>
-        </VStack>
+              </Heading>
+            </Link>
+
+            <Flex flexDir="column" width="100%" gap={2}>
+              <VStack>
+                <Box
+                  overflow="hidden"
+                  borderRadius="4px"
+                  height="250px"
+                  width="100%"
+                >
+                  <iframe
+                    allowFullScreen
+                    referrerPolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.327702052811!2d-73.995445!3d40.7328142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259975b41ef93%3A0xfa8234229ba42709!2s25%205th%20Ave%2C%20New%20York%2C%20NY%2010003!5e0!3m2!1sen!2sus!4v1657632297080!5m2!1sen!2sus"
+                    width="100%"
+                    height="100%"
+                    loading="lazy"
+                  />
+                </Box>
+              </VStack>
+            </Flex>
+          </VStack>
+        </AnimatedSection>
         {/* <Box
           pointerEvents="none"
           userSelect="none"
