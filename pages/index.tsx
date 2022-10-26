@@ -31,6 +31,9 @@ import Features from '../components/Features';
 import { getInstagramPosts } from '../lib/api';
 import { FlexMotion } from './results';
 
+import actionShot from '../public/assets/images/actionshot.jpg';
+import hero2 from '../public/assets/images/hero2.jpg';
+
 function AnimatedSection({
   children,
   transition = false,
@@ -65,9 +68,6 @@ function AnimatedSection({
 }
 
 export function Index({
-  actionShotBlur,
-  heroShotBlur,
-  heroShot2Blur,
   instagramPosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
@@ -148,13 +148,12 @@ export function Index({
                     >
                       <Image
                         placeholder="blur"
-                        blurDataURL={actionShotBlur}
-                        objectFit="cover"
-                        layout="fill"
+                        src={actionShot}
+                        style={{ objectFit: 'cover' }}
+                        fill
                         priority
                         draggable={false}
                         alt="action shot"
-                        src="/assets/images/actionshot.jpg"
                       />
                     </Box>
                   </FlexMotion>
@@ -301,12 +300,11 @@ export function Index({
           </Flex>
           <Image
             placeholder="blur"
-            blurDataURL={heroShot2Blur}
-            objectFit="cover"
-            layout="fill"
+            style={{ objectFit: 'cover' }}
+            fill
             draggable={false}
             alt="hero shot"
-            src="/assets/images/hero2.jpg"
+            src={hero2}
           />
         </Box>
         <VStack spacing={10} px={8}>
@@ -363,24 +361,6 @@ export function Index({
             </Flex>
           </VStack>
         </AnimatedSection>
-        {/* <Box
-          pointerEvents="none"
-          userSelect="none"
-          filter="saturate(.9)"
-          width="100%"
-          height={{ base: '250px', md: '275px', lg: '300px', xl: '325px' }}
-          position="relative"
-        >
-          <Image
-            placeholder="blur"
-            blurDataURL={heroShotBlur}
-            objectFit="cover"
-            layout="fill"
-            draggable={false}
-            alt="hero shot"
-            src="/assets/images/hero.jpg"
-          />
-        </Box> */}
 
         <Divider id="results" />
 
@@ -437,10 +417,10 @@ export function Index({
                         >
                           <Image
                             placeholder={post.blurDataURL ? 'blur' : 'empty'}
-                            layout="fill"
                             blurDataURL={post.blurDataURL}
-                            objectFit="contain"
                             draggable={false}
+                            style={{ objectFit: 'contain' }}
+                            fill
                             alt="picture"
                             src={
                               post.mediaType === 'VIDEO'
@@ -466,29 +446,10 @@ export const getStaticProps = async ({
   params,
   preview = false,
 }: GetStaticPropsContext) => {
-  const [
-    { base64: actionShotBase64 },
-    { base64: heroShotBase64 },
-    { base64: heroShot2Base64 },
-  ] = await Promise.all([
-    await getPlaiceholder('/assets/images/actionshot.jpg', {
-      size: 10,
-    }),
-    await getPlaiceholder('/assets/images/hero.jpg', {
-      size: 10,
-    }),
-    await getPlaiceholder('/assets/images/hero2.jpg', {
-      size: 10,
-    }),
-  ]);
-
   const instagramPosts = await getInstagramPosts();
 
   return {
     props: {
-      actionShotBlur: actionShotBase64,
-      heroShotBlur: heroShotBase64,
-      heroShot2Blur: heroShot2Base64,
       instagramPosts,
     },
     revalidate: 86400, // 24 hours

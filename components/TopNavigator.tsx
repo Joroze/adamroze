@@ -43,11 +43,9 @@ const TopNavigator = () => {
         bgColor={isHomePageRoute ? 'white' : undefined}
       >
         <Link passHref href="/">
-          <a>
-            <Text fontWeight="bold" fontSize="large">
-              Adam Rosenberg PA-C
-            </Text>
-          </a>
+          <Text fontWeight="bold" fontSize="large">
+            Adam Rosenberg PA-C
+          </Text>
         </Link>
 
         <HStack spacing={{ base: 5, md: 8 }}>

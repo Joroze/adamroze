@@ -47,3 +47,6 @@ Thumbs.db
 
 .next
 sendgrid.env
+
+# turbo
+.turbo

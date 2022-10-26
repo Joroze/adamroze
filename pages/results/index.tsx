@@ -47,9 +47,9 @@ export function Results({
                         placeholder={post.blurDataURL ? 'blur' : 'empty'}
                         blurDataURL={post.blurDataURL}
                         priority={index <= 2 ? true : false}
-                        objectFit="contain"
-                        width="300px"
-                        height="300px"
+                        style={{ objectFit: 'contain' }}
+                        width={300}
+                        height={300}
                         draggable={false}
                         alt="picture"
                         src={
